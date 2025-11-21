@@ -2,24 +2,41 @@ import React, { useState } from "react";
 import Lang from "../../assets/countryPic.a405156e5e231114f17b.webp";
 import SignUp from "../../assets/download.png";
 
-const HeaderSection = () => {
+const HeaderSection = ({
+  setSidebarOpen,
+  sidebarOpen,
+  setMobileSideBar,
+  mobilesidebar,
+}) => {
   const [dropOpen, setDropOpen] = useState(false);
   return (
     <div className="bg-[#F8F8F8] w-full max-w-10xl px-6 flex items-center justify-between h-16 sticky top-0 z-50">
-      <div className="flex items-center ">
+      <div className="flex items-center gap-2 ">
         <a href="#" className="flex items-center gap-x-3">
           <h1 className="text-3xl font-semibold ">Hammad's Dashboard</h1>
-          <svg
-            className="h-7 w-7 text-gray-800"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="currentColor"
-          >
-            <path d="M21 17.9995V19.9995H3V17.9995H21ZM6.59619 3.90332L8.01041 5.31753L4.82843 8.49951L8.01041 11.6815L6.59619 13.0957L2 8.49951L6.59619 3.90332ZM21 10.9995V12.9995H12V10.9995H21ZM21 3.99951V5.99951H12V3.99951H21Z" />
-          </svg>
         </a>
+        <svg
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="hidden lg:block h-7 w-7 text-gray-800"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="currentColor"
+        >
+          <path d="M21 17.9995V19.9995H3V17.9995H21ZM6.59619 3.90332L8.01041 5.31753L4.82843 8.49951L8.01041 11.6815L6.59619 13.0957L2 8.49951L6.59619 3.90332ZM21 10.9995V12.9995H12V10.9995H21ZM21 3.99951V5.99951H12V3.99951H21Z" />
+        </svg>
+        <svg
+          onClick={() => setMobileSideBar(!mobilesidebar)}
+          className="lg:hidden h-7 w-7 text-gray-800"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="currentColor"
+        >
+          <path d="M21 17.9995V19.9995H3V17.9995H21ZM6.59619 3.90332L8.01041 5.31753L4.82843 8.49951L8.01041 11.6815L6.59619 13.0957L2 8.49951L6.59619 3.90332ZM21 10.9995V12.9995H12V10.9995H21ZM21 3.99951V5.99951H12V3.99951H21Z" />
+        </svg>
       </div>
       <div className="flex items-center gap-3 ">
         <div>
