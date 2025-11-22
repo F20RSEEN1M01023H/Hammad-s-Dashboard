@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/header/HeaderSection";
 import Sidebar from "./components/sidebar/MainSidebar";
-import DashboardContent from "./components/dashboardContent/DashboardContent";
+import DashboardContent from "./components/dashboardContent/Dashboard";
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
