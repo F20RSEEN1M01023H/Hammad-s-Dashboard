@@ -17,6 +17,7 @@ const HeaderSection = ({
             Hammad's Dashboard
           </h1>
         </a>
+        {/* {large screens } */}
         <svg
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="hidden lg:block h-7 w-7 text-gray-800"
@@ -28,6 +29,7 @@ const HeaderSection = ({
         >
           <path d="M21 17.9995V19.9995H3V17.9995H21ZM6.59619 3.90332L8.01041 5.31753L4.82843 8.49951L8.01041 11.6815L6.59619 13.0957L2 8.49951L6.59619 3.90332ZM21 10.9995V12.9995H12V10.9995H21ZM21 3.99951V5.99951H12V3.99951H21Z" />
         </svg>
+        {/* small screens  */}
         <svg
           onClick={() => setMobileSideBar(!mobilesidebar)}
           className="lg:hidden h-5 w-5 sm:h-7 sm:w-7 text-gray-800"
