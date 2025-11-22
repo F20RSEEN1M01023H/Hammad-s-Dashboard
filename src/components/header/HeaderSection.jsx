@@ -10,10 +10,12 @@ const HeaderSection = ({
 }) => {
   const [dropOpen, setDropOpen] = useState(false);
   return (
-    <div className="bg-[#F8F8F8] w-full max-w-10xl px-6 flex items-center justify-between h-16 sticky top-0 z-50">
+    <div className="bg-[#F8F8F8] w-full max-w-10xl px-2 md:px-6 flex items-center justify-between h-16 sticky top-0 z-50">
       <div className="flex items-center gap-2 ">
         <a href="#" className="flex items-center gap-x-3">
-          <h1 className="text-3xl font-semibold ">Hammad's Dashboard</h1>
+          <h1 className="  text-xl md:text-3xl font-semibold ">
+            Hammad's Dashboard
+          </h1>
         </a>
         <svg
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -28,7 +30,7 @@ const HeaderSection = ({
         </svg>
         <svg
           onClick={() => setMobileSideBar(!mobilesidebar)}
-          className="lg:hidden h-7 w-7 text-gray-800"
+          className="lg:hidden h-5 w-5 sm:h-7 sm:w-7 text-gray-800"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="20"
@@ -64,7 +66,7 @@ const HeaderSection = ({
             className="flex items-center gap-1"
           >
             <img className="h-5 w-5 rounded-full" src={SignUp} alt="" />
-            <h5 className="font-semibold">Hammad Ashraf</h5>
+            <h5 className="font-semibold hidden sm:block">Hammad Ashraf</h5>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"

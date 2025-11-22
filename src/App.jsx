@@ -14,7 +14,7 @@ const App = () => {
         mobilesidebar={mobilesidebar}
         setMobileSideBar={setMobileSideBar}
       />
-      <div className="flex items-center">
+      <div className="flex w-full">
         <aside>
           <Sidebar
             sidebarOpen={sidebarOpen}
@@ -22,7 +22,7 @@ const App = () => {
             setMobileSideBar={setMobileSideBar}
           />
         </aside>
-        <main>
+        <main className="w-full">
           <DashboardContent />
         </main>
       </div>
