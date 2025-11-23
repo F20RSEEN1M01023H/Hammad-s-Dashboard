@@ -8,7 +8,7 @@ const SidebarSmall = ({
   setIndexOpen,
 }) => {
   return (
-    <div className="relative z-[9999]">
+    <div className="">
       {mobilesidebar && (
         <div
           className={` fixed top-16 left-0  h-screen bg-[#f8f9f8] pt-5  lg:hidden ${

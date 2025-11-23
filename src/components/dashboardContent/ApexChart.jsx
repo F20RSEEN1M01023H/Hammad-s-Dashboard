@@ -97,7 +97,7 @@ export default function WeeklyRegistrationsBar({
   const total = countsByDay.reduce((a, b) => a + b, 0);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div className="bg-[#f8f8f8] rounded-lg shadow p-4">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-gray-800 font-semibold">
           Weekly Registrations (Sun → Sat)
@@ -105,13 +105,24 @@ export default function WeeklyRegistrationsBar({
         <div className="text-sm text-gray-500">Total: {total}</div>
       </div>
 
-      <div className="w-[88%]" style={{ height: "230px" }}>
+      <div
+        className="apex-chart-container"
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "260px",
+          overflow: "hidden",
+          contain: "strict", // Force containment
+          isolation: "isolate", // New stacking context
+          transform: "translateZ(0)", // Force GPU layer
+        }}
+      >
         <Chart
-          className=""
           options={options}
           series={series}
           type="bar"
-          height={230}
+          height={260}
+          width="100%"
         />
       </div>
     </div>

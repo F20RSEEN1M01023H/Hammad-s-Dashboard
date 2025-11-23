@@ -9,7 +9,7 @@ const App = () => {
 
   const [indexOpen, setIndexOpen] = useState(false);
   return (
-    <div className="bg-[#F8F8F8] w-full">
+    <div className="bg-[#F8F8F8]  w-full">
       <Header
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

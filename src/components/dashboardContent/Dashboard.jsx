@@ -1,6 +1,7 @@
 import React from "react";
-import WeeklyRegistrationsChart from "./WeeklyRegisterationsChart";
 import ApexChart from "./ApexChart";
+import DSectionOne from "./DSectionOne";
+import DSectionThree from "./DSectionThree";
 
 const Dashboard = () => {
   const demoRegistrations = [
@@ -15,13 +16,17 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="w-auto mx-2 max-w-10xl px-5   py-4 rounded-3xl bg-white h-screen">
+    <div className="w-auto mx-2 max-w-10xl px-5 z-50  py-8 rounded-3xl bg-white ">
       <section>
         <h1 className="text-3xl font-semibold">Dashboard</h1>
         <p className="text-gray-500">Welcome back, Super Admin</p>
+        <DSectionOne />
       </section>
-      <section className="py-4   bg-white rounded-lg shadow ">
+      <section className="py-4  z-0   bg-[#f8f8f8] rounded-lg shadow ">
         <ApexChart data={demoRegistrations} weekStartDate={"2025-11-16"} />
+      </section>
+      <section>
+        <DSectionThree />
       </section>
     </div>
   );
