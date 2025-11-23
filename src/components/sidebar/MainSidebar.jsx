@@ -16,7 +16,11 @@ const MainSidebar = ({
         setIndexOpen={setIndexOpen}
       />
       {/* {Large Screens } */}
-      <SidebarLarge sidebarOpen={sidebarOpen} />
+      <SidebarLarge
+        sidebarOpen={sidebarOpen}
+        indexOpen={indexOpen}
+        setIndexOpen={setIndexOpen}
+      />
     </div>
   );
 };

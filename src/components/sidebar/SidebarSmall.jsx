@@ -8,10 +8,10 @@ const SidebarSmall = ({
   setIndexOpen,
 }) => {
   return (
-    <div>
+    <div className="relative z-[9999]">
       {mobilesidebar && (
         <div
-          className={` fixed top-16 left-0   h-screen bg-[#f8f9f8] pt-5  lg:hidden ${
+          className={` fixed top-16 left-0  h-screen bg-[#f8f9f8] pt-5  lg:hidden ${
             mobilesidebar ? "translate-x-0" : "-translate-x-full"
           }`}
         >

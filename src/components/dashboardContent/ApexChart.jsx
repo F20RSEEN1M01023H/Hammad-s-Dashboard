@@ -1,13 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-function toDate(x) {
-  if (!x) return null;
-  if (x instanceof Date) return x;
-  return new Date(x);
-}
 
 function getWeekRangeContaining(date = new Date()) {
   const d = new Date(date);
@@ -22,36 +16,39 @@ function getWeekRangeContaining(date = new Date()) {
   return { sunday, saturday };
 }
 
-/**
- * props:
- *  - data: array of timestamps (string/number) OR objects having createdAt | timestamp
- *  - weekStartDate (optional): any Date/ISO that belongs to the week you want to visualize
- */
 export default function WeeklyRegistrationsBar({
   data = [],
   weekStartDate = null,
+  weekMode = "previous", // "previous" or "current"
 }) {
-  // Aggregate counts for each weekday (Sun..Sat)
+  // referenceDate is computed once in an effect — avoids calling Date.now() during render
+  const [referenceDate, setReferenceDate] = useState(null);
+
+  useEffect(() => {
+    if (weekStartDate) {
+      // safe to set directly because it's an external value, but still we can defer
+      setTimeout(() => setReferenceDate(new Date(weekStartDate)), 0);
+      return;
+    }
+
+    if (weekMode === "previous") {
+      const t = setTimeout(() => {
+        setReferenceDate(new Date(Date.now() - 24 * 60 * 60 * 1000));
+      }, 0);
+      return () => clearTimeout(t);
+    }
+
+    const t = setTimeout(() => setReferenceDate(new Date()), 0);
+    return () => clearTimeout(t);
+  }, [weekStartDate, weekMode]);
+
+  // If referenceDate not ready yet, render a placeholder (or zeros) — prevents using impure funcs in render
   const countsByDay = useMemo(() => {
     const counts = Array(7).fill(0);
+    if (!referenceDate) return counts;
     if (!data || !data.length) return counts;
 
-    // determine week range
-    let sunday, saturday;
-    if (weekStartDate) {
-      const s = toDate(weekStartDate);
-      const shift = s.getDay();
-      sunday = new Date(s);
-      sunday.setDate(s.getDate() - shift);
-      sunday.setHours(0, 0, 0, 0);
-      saturday = new Date(sunday);
-      saturday.setDate(sunday.getDate() + 6);
-      saturday.setHours(23, 59, 59, 999);
-    } else {
-      const r = getWeekRangeContaining(new Date());
-      sunday = r.sunday;
-      saturday = r.saturday;
-    }
+    const { sunday, saturday } = getWeekRangeContaining(referenceDate);
 
     const extractDate = (it) => {
       if (!it) return null;
@@ -69,35 +66,26 @@ export default function WeeklyRegistrationsBar({
       }
     }
     return counts;
-  }, [data, weekStartDate]);
+  }, [data, referenceDate]);
+
+  // ensure chart reflows after mount (helps when inside collapsing sidebar)
+  useEffect(() => {
+    const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 320);
+    return () => clearTimeout(t);
+  }, []);
 
   const options = useMemo(() => {
     return {
-      chart: {
-        toolbar: { show: false },
-        animations: { enabled: true },
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 6,
-          columnWidth: "50%",
-        },
-      },
+      chart: { toolbar: { show: false }, animations: { enabled: true } },
+      plotOptions: { bar: { borderRadius: 6, columnWidth: "50%" } },
       xaxis: {
         categories: WEEK_DAYS,
         labels: { style: { colors: "#6b7280" } },
       },
-      yaxis: {
-        labels: { style: { colors: "#6b7280" } },
-        forceNiceScale: true,
-      },
+      yaxis: { labels: { style: { colors: "#6b7280" } }, forceNiceScale: true },
       dataLabels: { enabled: false },
-      tooltip: {
-        y: {
-          formatter: (v) => `${v} registrations`,
-        },
-      },
-      colors: ["#2563EB"], // Tailwind blue-600
+      tooltip: { y: { formatter: (v) => `${v} registrations` } },
+      colors: ["#2563EB"],
       grid: { strokeDashArray: 4, borderColor: "#eef2f7" },
     };
   }, []);
@@ -106,7 +94,6 @@ export default function WeeklyRegistrationsBar({
     () => [{ name: "Registrations", data: countsByDay }],
     [countsByDay]
   );
-
   const total = countsByDay.reduce((a, b) => a + b, 0);
 
   return (
@@ -118,8 +105,14 @@ export default function WeeklyRegistrationsBar({
         <div className="text-sm text-gray-500">Total: {total}</div>
       </div>
 
-      <div style={{ width: "100%", height: 260 }}>
-        <Chart options={options} series={series} type="bar" height={220} />
+      <div className="w-[88%]" style={{ height: "230px" }}>
+        <Chart
+          className=""
+          options={options}
+          series={series}
+          type="bar"
+          height={230}
+        />
       </div>
     </div>
   );
