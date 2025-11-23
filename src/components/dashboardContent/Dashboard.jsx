@@ -22,8 +22,10 @@ const Dashboard = () => {
         <p className="text-gray-500">Welcome back, Super Admin</p>
         <DSectionOne />
       </section>
-      <section className="py-4  z-0   bg-[#f8f8f8] rounded-lg shadow ">
-        <ApexChart data={demoRegistrations} weekStartDate={"2025-11-16"} />
+      <section className="py-4  z-0    ">
+        <div className="chart-card chart-container w-full bg-[#f8f8f8] rounded-lg shadow p-4">
+          <ApexChart data={demoRegistrations} weekStartDate={"2025-11-16"} />
+        </div>
       </section>
       <section>
         <DSectionThree />

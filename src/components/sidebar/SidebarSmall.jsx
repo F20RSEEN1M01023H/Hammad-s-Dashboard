@@ -11,7 +11,7 @@ const SidebarSmall = ({
     <div className="">
       {mobilesidebar && (
         <div
-          className={` fixed top-16 left-0  h-screen bg-[#f8f9f8] pt-5  lg:hidden ${
+          className={` fixed top-16 left-0  h-screen bg-[#f8f8f8] pt-5  lg:hidden ${
             mobilesidebar ? "translate-x-0" : "-translate-x-full"
           }`}
         >

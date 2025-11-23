@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+/* ---------- global overrides to keep apexcharts under overlays ---------- */
+
+/* Ensure apex charts elements don't create a higher stacking context */
+.apexcharts-canvas,
+.apexcharts-svg,
+.apexcharts-inner,
+.apexcharts-series,
+.apexcharts-area,
+.apexcharts-bar-series,
+.apexcharts-bar {
+    position: relative !important;
+    z-index: 0 !important;
+}
+
+/* If chart uses <rect> or groups, make sure children stay at base level */
+.apexcharts-svg * {
+    vector-effect: non-scaling-stroke;
+    z-index: 0 !important;
+}
+
+/* Ensure chart container is not above overlays */
+.chart-card,
+.chart-container {
+    position: relative;
+    z-index: 10;
+    /* lower than sidebar z */
+}

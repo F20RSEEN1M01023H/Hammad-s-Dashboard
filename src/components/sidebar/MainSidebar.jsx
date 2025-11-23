@@ -7,6 +7,7 @@ const MainSidebar = ({
   sidebarOpen,
   indexOpen,
   setIndexOpen,
+  setMobileSideBar,
 }) => {
   return (
     <div className="">
@@ -14,6 +15,7 @@ const MainSidebar = ({
         mobilesidebar={mobilesidebar}
         indexOpen={indexOpen}
         setIndexOpen={setIndexOpen}
+        setMobilesidebar={setMobileSideBar}
       />
       {/* {Large Screens } */}
       <SidebarLarge
