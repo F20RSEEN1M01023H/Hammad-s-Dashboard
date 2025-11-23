@@ -1,16 +1,88 @@
-# React + Vite
+# 📊 Admin Dashboard – ReactJS + Tailwind CSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive Admin Dashboard built using ReactJS, Tailwind CSS, ApexCharts, and reusable components.
+This dashboard includes weekly registrations graphs, mobile-friendly sidebar, dynamic data tables, and fully responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- 📱 Responsive Layout with sidebar, header, and content alignment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📊 Weekly Registrations Bar Chart using ApexCharts
 
-## Expanding the ESLint configuration
+- 📦 Dashboard Stats Cards (dynamic from array/object)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🧾 Two Dynamic Tables Section
+
+## Orders Table
+
+## Subscriptions Table
+
+- 📤 Horizontal Scrollable Table
+
+- 🔧 Reusable Components Structure
+
+- 🎨 Tailwind CSS Styling
+
+- 🧩 Mobile Sidebar with Smooth Toggle
+
+- ⚡ Fast, clean, modern UI
+
+---
+
+# 🛠️ Tech Stack
+
+- Technology Purpose
+- ReactJS Frontend Framework
+- Vite / CRA Build Tool
+- Tailwind CSS Styling
+- ApexCharts Graphs & Charts
+- React Icons / SVGs Icons
+- Custom Components UI Architecture
+
+---
+
+## 📂 Folder Structure
+
+-src/
+├── components/
+│ ├── dashboard/
+│ │ ├── WeeklyChart.jsx
+│ │ ├── StatsCards.jsx
+│ │ ├── TwoTablesSection.jsx
+│ │ └── Sidebar.jsx
+│ ├── Header.jsx
+│ ├── Layout.jsx
+├── pages/
+│ └── Dashboard.jsx
+├── App.jsx
+└── main.jsx
+
+---
+
+## 📸 Screenshots
+
+- ![Dashboard Screenshot](./src/assets/screencapture-localhost-5173-2025-11-23-18_46_55.png)
+
+---
+
+- ![Dashboard Screenshot](./src/assets/screencapture-localhost-5173-2025-11-23-18_47_22.png)
+
+---
+
+## 🧩 Dashboard Home
+
+- 📊 Weekly Registrations Graph
+
+- 📦 Stats Cards Section
+
+- 🧾 Orders Table Section
+
+- 📑 Subscriptions Table Section
+
+- 📱 Mobile Sidebar Open
+
+## 📈 Weekly Registrations Graph (ApexCharts)
+
+- The chart is fully responsive and auto-adjusts after sidebar toggle.
