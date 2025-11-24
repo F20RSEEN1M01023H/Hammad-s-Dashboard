@@ -1,60 +1,49 @@
 // src/components/ui/MobileSidebarPortal.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 
 export default function MobileSidebarPortal({
   open,
   onClose,
   children,
-  topOffset = 64, // header height in px
+  topOffset = 64,
 }) {
-  // hooks always declared at top-level
-  const [mounted, setMounted] = useState(false);
+  // Remove useState + setMounted entirely
 
-  // Deferred mount: set state asynchronously to avoid "setState synchronously within an effect" warning.
   useEffect(() => {
-    const id = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(id);
-  }, []);
+    if (!open) return;
 
-  // Manage body scroll only after we're mounted (safe DOM access)
-  useEffect(() => {
-    if (!mounted) return;
-    const original = document.body.style.overflow;
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = original || "";
+    // Prevent body scroll when sidebar is open
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = original || "";
+      document.body.style.overflow = "";
     };
-  }, [open, mounted]);
+  }, [open]);
 
-  // During SSR / before mounted on client, render nothing
-  if (!mounted) return null;
+  // If not open → render nothing
+  if (!open) return null;
 
-  // Now safe to create portal (document exists)
+  // Safe: createPortal only runs on client (after first render)
   return createPortal(
     <>
+      {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/40 lg:hidden transition-opacity duration-200 ${
-          open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        style={{ zIndex: 900 }}
+        className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
         onClick={onClose}
       />
+
+      {/* Sidebar Panel */}
       <div
-        className={`fixed left-0 w-64 transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className="fixed inset-x-0 top-16 w-64 h-screen bg-[#f8f8f8] z-50 shadow-2xl transform transition-transform duration-300 ease-in-out translate-x-0"
         style={{
-          top: topOffset,
+          top: `${topOffset}px`,
           height: `calc(100vh - ${topOffset}px)`,
-          zIndex: 1000,
-          background: "#f8f9f8",
         }}
       >
-        {children}
+        <div className="pt-5 px-2 text-gray-600 overflow-y-auto h-full">
+          {children}
+        </div>
       </div>
     </>,
     document.body

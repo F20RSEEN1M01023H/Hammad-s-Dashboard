@@ -8,6 +8,7 @@ const HeaderSection = ({
   setMobileSideBar,
   mobilesidebar,
 }) => {
+  
   const [dropOpen, setDropOpen] = useState(false);
   return (
     <div className="bg-[#F8F8F8] w-full max-w-10xl px-2 md:px-6 flex items-center justify-between h-16 sticky top-0 z-50">
